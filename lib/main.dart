@@ -11,9 +11,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Revity',
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Revity')),
-        body: const Center(child: Text('Welcome to Revity')),
       ),
     );
   }

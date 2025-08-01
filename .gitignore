@@ -1,26 +1,2 @@
 # Flutter/Dart/Pub related
-**/doc/api/**
-.dart_tool/
-.packages
-build/
-flutter_*
-.pub-cache/
-.pub/
 
-# Visual Studio Code
-.vscode/
-
-# IntelliJ
-.idea/
-*.iml
-
-# Flutter generated directories
-android/
-ios/
-macos/
-web/
-windows/
-linux/
-
-# Other
-.DS_Store
