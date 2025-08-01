@@ -19,32 +19,102 @@
 - Flutter
 - Google Places API
 - Yelp Fusion API
-- OpenAI (optional for NLP summarization)
 - Flutter packages: `http`, `geolocator`, `url_launcher`, `flutter_dotenv`
 
-## 🔐 API Keys
+## 🔐 API Keys Setup
 
 To run this app, you'll need API keys from:
 
-- [Google Cloud Platform (Places API)](https://console.cloud.google.com/)
-- [Yelp Fusion](https://www.yelp.com/developers/v3/manage_app)
+1. **Google Cloud Platform (Places API)**
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select existing one
+   - Enable the Places API
+   - Create credentials (API Key)
+   - Restrict the key to Places API only for security
 
-Add them to a `.env` file in your root directory:
+2. **Yelp Fusion API**
+   - Go to [Yelp Developers](https://www.yelp.com/developers/v3/manage_app)
+   - Create a new app
+   - Get your API key
+
+3. **Configure Environment**
+   - Copy `env.example` to `.env`
+   - Add your API keys:
 
 ```env
-GOOGLE_MAPS_API_KEY=your_google_key
-YELP_API_KEY=your_yelp_key
+GOOGLE_MAPS_API_KEY=your_google_key_here
+YELP_API_KEY=your_yelp_key_here
 ```
 
-## 📍 Getting the current location
+## 🛠️ Getting Started
 
-This project uses the [`geolocator`](https://pub.dev/packages/geolocator) package
- to obtain the device's latitude and longitude. The `LocationService` class in
-[`lib/location_service.dart`](lib/location_service.dart) wraps the permission
-checks and provides a simple API:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/revity-app.git
+   cd revity-app
+   ```
 
-```dart
-final position = await LocationService.getCurrentLocation();
-print('Lat: ${position.latitude}, Lng: ${position.longitude}');
-```
+2. **Install dependencies**
+   ```bash
+   flutter pub get
+   ```
+
+3. **Set up API keys**
+   ```bash
+   cp env.example .env
+   # Edit .env with your actual API keys
+   ```
+
+4. **Run the app**
+   ```bash
+   flutter run
+   ```
+
+## 📱 Platform Setup
+
+### Android
+- No additional setup required
+- Location permissions are handled automatically
+
+### iOS
+- Open `ios/Runner.xcworkspace` in Xcode
+- Add location usage descriptions in `Info.plist`:
+  ```xml
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>This app needs location access to find places near you</string>
+  ```
+
+## 🔧 Usage
+
+1. **Search by name**: Enter a place name (e.g., "Starbucks", "McDonald's")
+2. **Use current location**: Tap the location button to search nearby places
+3. **View aggregated reviews**: See ratings from both Google and Yelp
+4. **Read full reviews**: Tap "View on Google" or "View on Yelp" to see complete reviews
+5. **Summary tags**: See what people commonly mention about the place
+
+## 📄 License
+
+This project is **not licensed for commercial use**.  
+See the [LICENSE](./LICENSE) file for full terms.
+
+## 🤝 Contributing
+
+Pull requests are welcome for non-commercial purposes. For major changes, please open an issue first to discuss what you'd like to change or improve.
+
+## 🐛 Troubleshooting
+
+**"API key not found" error**
+- Make sure you've created the `.env` file
+- Verify your API keys are correct
+- Check that the keys have the necessary permissions
+
+**"No reviews found" error**
+- Try a more specific place name
+- Ensure the place exists on both Google and Yelp
+- Check your internet connection
+
+**Location not working**
+- Grant location permissions when prompted
+- Enable location services on your device
+- For iOS, ensure location usage descriptions are added
 
