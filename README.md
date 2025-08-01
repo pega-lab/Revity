@@ -34,3 +34,17 @@ Add them to a `.env` file in your root directory:
 ```env
 GOOGLE_MAPS_API_KEY=your_google_key
 YELP_API_KEY=your_yelp_key
+```
+
+## 📍 Getting the current location
+
+This project uses the [`geolocator`](https://pub.dev/packages/geolocator) package
+ to obtain the device's latitude and longitude. The `LocationService` class in
+[`lib/location_service.dart`](lib/location_service.dart) wraps the permission
+checks and provides a simple API:
+
+```dart
+final position = await LocationService.getCurrentLocation();
+print('Lat: ${position.latitude}, Lng: ${position.longitude}');
+```
+
