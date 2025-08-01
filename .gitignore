@@ -1,0 +1,15 @@
+# Flutter/Dart/Pub related
+**/build/
+.dart_tool/
+.packages
+.pub/
+
+# IDE files
+.idea/
+.vscode/
+
+# Mac/Linux
+.DS_Store
+
+# Env
+.env
