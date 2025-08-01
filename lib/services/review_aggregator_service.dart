@@ -35,7 +35,7 @@ class ReviewAggregatorService {
 
       // Merge Yelp data if available
       if (yelpData != null) {
-        aggregatedData = aggregatedData!.copyWith(
+        aggregatedData = aggregatedData.copyWith(
           yelpRating: yelpData.yelpRating,
           yelpReviews: yelpData.yelpReviews,
           yelpUrl: yelpData.yelpUrl,
@@ -45,7 +45,7 @@ class ReviewAggregatorService {
 
       // Generate summary tags from review snippets
       final summaryTags = _generateSummaryTags(
-        [...aggregatedData!.googleReviewSnippets, ...aggregatedData.yelpReviewSnippets],
+        [...aggregatedData.googleReviewSnippets, ...aggregatedData.yelpReviewSnippets],
       );
 
       return aggregatedData.copyWith(summaryTags: summaryTags);

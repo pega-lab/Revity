@@ -1,4 +1,13 @@
 name: revity
+description: A cross-platform mobile app that aggregates ratings, reviews, and social links from platforms like Google and Yelp.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:
@@ -11,6 +20,13 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
+  
+  assets:
+    - .env
+
+# Enable web platform
+flutter_web: true

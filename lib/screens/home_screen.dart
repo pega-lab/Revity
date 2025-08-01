@@ -75,30 +75,54 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     try {
-      final place = await ReviewAggregatorService.aggregateReviews(
-        query,
-        latitude: _currentPosition?.latitude,
-        longitude: _currentPosition?.longitude,
-      );
+      PlaceReviewModel? place;
+      
+      // If we have current location and the query looks like coordinates, search nearby
+      if (_currentPosition != null && 
+          (query.contains(',') || query.contains('${_currentPosition!.latitude}') || query.contains('${_currentPosition!.longitude}'))) {
+        // Search for nearby places
+        final nearbyPlaces = await ReviewAggregatorService.searchNearbyPlaces(
+          _currentPosition!.latitude,
+          _currentPosition!.longitude,
+          limit: 1,
+        );
+        
+        if (nearbyPlaces.isNotEmpty) {
+          place = nearbyPlaces.first;
+        }
+      } else {
+        // Regular search by name
+        place = await ReviewAggregatorService.aggregateReviews(
+          query,
+          latitude: _currentPosition?.latitude,
+          longitude: _currentPosition?.longitude,
+        );
+      }
 
       setState(() {
         _isLoading = false;
         if (place != null) {
           _currentPlace = place;
         } else {
-          _errorMessage = 'No reviews found for "$query"';
+          _errorMessage = 'No reviews found for "$query". Try searching for any restaurant name to see demo results.';
         }
       });
     } catch (e) {
       setState(() {
         _isLoading = false;
-        _errorMessage = 'Error searching for reviews: $e';
+        final errorMsg = e.toString();
+        if (errorMsg.contains('API key not configured')) {
+          _errorMessage = 'API keys not configured. Try searching for any restaurant name to see demo results.';
+        } else {
+          _errorMessage = 'Error searching for reviews: $e. Try searching for any restaurant name to see demo results.';
+        }
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    print('HomeScreen build called'); // Debug print
     return Scaffold(
       appBar: AppBar(
         title: const Text('Revity'),
