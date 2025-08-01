@@ -1,14 +1,2 @@
 # Flutter/Dart/Pub related
-.dart_tool/
-.packages
-.pub/
-build/
-.flutter-plugins
-generated_plugin_registrant.dart
 
-# IDEs
-.idea/
-*.iml
-
-# Other
-.env
